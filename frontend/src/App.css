@@ -1,0 +1,87 @@
+/* Card container */
+.container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 700px;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Page heading */
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Question block */
+.question-card {
+  margin-bottom: 25px;
+}
+
+.question-card p {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+/* Option row */
+.option {
+  display: flex;
+  justify-content: space-between; /* text left, radio right */
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+}
+
+/* Hover effect */
+.option:hover {
+  background: #f5f7ff;
+  border-color: #667eea;
+}
+
+/* Option text */
+.option span {
+  font-size: 15px;
+  color: #444;
+  max-width: 85%;
+}
+
+/* Radio button */
+.option input[type="radio"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Selected option */
+.option:has(input[type="radio"]:checked) {
+  background: #eef2ff;
+  border-color: #667eea;
+}
+
+.option input[type="radio"]:checked {
+  accent-color: #667eea;
+}
+
+/* Submit button */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: #667eea;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #5a67d8;
+}

@@ -1,35 +1,34 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "../App.css";
 
 function Quiz() {
   const { id } = useParams();
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
   const navigate = useNavigate();
+  const [questions, setQuestions] = useState([]);
+  const [responses, setResponses] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/quiz/get/${id}`)
-      .then((res) => res.json())
-      .then((data) => setQuestions(data));
+    fetch(`${import.meta.env.VITE_API_URL}/quiz/get/${id}`)
+      .then(res => res.json())
+      .then(data => setQuestions(data));
   }, [id]);
 
-  const selectAnswer = (qid, value) => {
-    setAnswers((prev) => {
-      const filtered = prev.filter((a) => a.id !== qid);
-      return [...filtered, { id: qid, response: value }];
+  const handleOptionChange = (questionId, answer) => {
+    setResponses(prev => {
+      const filtered = prev.filter(r => r.id !== questionId);
+      return [...filtered, { id: questionId, response: answer }];
     });
   };
 
   const submitQuiz = () => {
-    fetch(`http://localhost:8080/quiz/submit/${id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/quiz/submit/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(answers),
+      body: JSON.stringify(responses)
     })
-      .then((res) => res.json())
-      .then((score) => {
-        navigate(`/result?score=${score}`, { replace: true });
+      .then(res => res.json())
+      .then(score => {
+        navigate("/result", { state: { score }, replace: true });
       });
   };
 
@@ -37,22 +36,20 @@ function Quiz() {
     <div className="container">
       <h2>Quiz</h2>
 
-      {questions.map((q, index) => (
-        <div className="question-card" key={q.id}>
-          <p>{index + 1}. {q.questionTitle}</p>
+      {questions.map(q => (
+        <div key={q.id}>
+          <h4>{q.questionTitle}</h4>
 
-          {[q.option1, q.option2, q.option3, q.option4].map((opt) => (
-            <label className="option" key={opt}>
-              {/* LEFT SIDE: option text */}
-              <span>{opt}</span>
-
-              {/* RIGHT SIDE: radio button */}
+          {[q.option1, q.option2, q.option3, q.option4].map((opt, index) => (
+            <div key={index}>
               <input
                 type="radio"
-                name={`q${q.id}`}
-                onChange={() => selectAnswer(q.id, opt)}
+                name={q.id}
+                value={opt}
+                onChange={() => handleOptionChange(q.id, opt)}
               />
-            </label>
+              {opt}
+            </div>
           ))}
         </div>
       ))}

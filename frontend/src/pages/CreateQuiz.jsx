@@ -10,17 +10,14 @@ function CreateQuiz() {
 
   const createQuiz = () => {
     fetch(
-      `http://localhost:8080/quiz/create?category=${category}&numQ=${numQ}&title=${title}`,
+      `${import.meta.env.VITE_API_URL}/quiz/create?category=${category}&numQ=${numQ}&title=${title}`,
       { method: "POST" }
     )
       .then(res => {
-        if (!res.ok) {
-          throw new Error("Failed to create quiz");
-        }
-        return res.json();   // 🔥 THIS WAS MISSING
+        if (!res.ok) throw new Error("Failed to create quiz");
+        return res.json();
       })
       .then(quizId => {
-        console.log("Quiz ID:", quizId); // 🔍 debug
         navigate(`/quiz/${quizId}`, { replace: true });
       })
       .catch(err => {

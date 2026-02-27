@@ -6,10 +6,7 @@ import com.java.quizapp.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-@CrossOrigin(origins = {
-        "http://localhost:5173",
-        "https://quiz-web-application-6ktd2g0xu-anirudh-singh-rajawats-projects.vercel.app"
-})
+
 @RestController
 @RequestMapping("question")
 public class QuestionController {

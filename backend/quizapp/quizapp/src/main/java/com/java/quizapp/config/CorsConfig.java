@@ -17,7 +17,8 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:5173",
-                                "https://quiz-web-application-6ktd2g0xu-anirudh-singh-rajawats-projects.vercel.app"
+                                "https://quiz-web-application-6ktd2g0xu-anirudh-singh-rajawats-projects.vercel.app",
+                                "https://quiz-web-application-git-main-anirudh-singh-rajawats-projects.vercel.app"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");

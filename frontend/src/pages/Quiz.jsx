@@ -1,3 +1,8 @@
+useEffect(() => {
+  fetch(`${import.meta.env.VITE_API_URL}/quiz/get/${id}`)
+    .then(res => res.json())
+    .then(data => setQuestions(data));
+}, [id]);
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
